@@ -10,11 +10,11 @@ def superReducedString(s):
         else:
             charStack.append([c,1])
     
-    print(charStack)
-    # if charStack:
-    # return "".join(c charStack[][0])
-    # else:
-    #     return str()
+    
+    if bool(charStack): #This bool will tell if list is empty
+        return "".join(z for z,v in charStack)
+    else:
+        return "Empty String"
 
 if __name__ == '__main__':
     s = "aa"
