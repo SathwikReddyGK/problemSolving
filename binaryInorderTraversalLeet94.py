@@ -25,21 +25,34 @@ class BinaryTree:
                     node = nodeQueue.get()
 
 def inorderTraversal(root):
-# Solution suggested by a user is translated to python
-        result = []
-        nodeList = []
-        currentNode = root
+# Recursive solution
+    result = []
+    def recursiveInOrder(root):
+        if root == None:
+            return
+        else:
+            recursiveInOrder(root.left)
+            result.append(root.val)
+            recursiveInOrder(root.right)
+            return
 
-        while currentNode != None or bool(nodeList):
-            while currentNode != None:
-                nodeList.append(currentNode)
-                currentNode = currentNode.left
+    recursiveInOrder(root)   
+    return result 
+# Solution suggested by a user in JAVA is translated to python, iterative
+        # result = []
+        # nodeList = []
+        # currentNode = root
+
+        # while currentNode != None or bool(nodeList):
+        #     while currentNode != None:
+        #         nodeList.append(currentNode)
+        #         currentNode = currentNode.left
             
-            currentNode = nodeList.pop()
-            result.append(currentNode.val)
-            currentNode = currentNode.right
+        #     currentNode = nodeList.pop()
+        #     result.append(currentNode.val)
+        #     currentNode = currentNode.right
         
-        return result
+        # return result
 
 if __name__ == "__main__":
      nodes = [0,3,1,2,4,9,10,None,5,6]
