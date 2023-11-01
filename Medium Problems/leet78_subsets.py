@@ -2,32 +2,32 @@ import datetime
 def subsets(nums):
     # BFS, User logic, trying to implement it
     # As of now I think BFS takes 2^n
-    # res = []
+    res = []
 
-    # res.append([])
-    # for num in nums:
-    #     for i in range(0,len(res)):
-    #         res.append(res[i].copy())
-    #         res[-1].append(num)
+    res.append([])
+    for num in nums:
+        for i in range(0,len(res)):
+            res.append(res[i].copy())
+            res[-1].append(num)
     
-    # return res
+    return res
     # DFS, My solution completed with help of user solution
     # As of now I think DFS takes n!
-    res = []
-    res.append([])
+    # res = []
+    # res.append([])
 
-    def dfs(begin,temp):
-        res.append(temp.copy())
-        for i in range(begin,len(nums)):
-            temp.append(nums[i])
-            dfs(i+1,temp)
-            temp.pop()
+    # def dfs(begin,temp):
+    #     res.append(temp.copy())
+    #     for i in range(begin,len(nums)):
+    #         temp.append(nums[i])
+    #         dfs(i+1,temp)
+    #         temp.pop()
     
-    for i in range(0,len(nums)):
-        temp = []
-        temp.append(nums[i])
-        dfs(i+1,temp)
-    return res
+    # for i in range(0,len(nums)):
+    #     temp = []
+    #     temp.append(nums[i])
+    #     dfs(i+1,temp)
+    # return res
             
     
 
