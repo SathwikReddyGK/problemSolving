@@ -4,15 +4,17 @@ def permute(A):
             yield sol.copy()
         for element in A:
             if element not in sol:
-                print("before",sol)
+                # print("before",sol)
                 # for i in backtracking(sol+[element]):
                 #     print(i)
                 yield from backtracking(sol+[element])
-                print("after",sol)
+                # print("after",sol)
     list = []
-    # yield from backtracking(list)
+    list2 = []
     for i in backtracking(list):
-        print(i)
+        list2.append(i)
+    
+    return list2
     
     # # User solution, recursion with swap, might save memory
     # res = []
@@ -71,7 +73,7 @@ def permute(A):
 
 if __name__ == "__main__":
     nums = [1,2,3,4]
-    for i in permute(nums):
-        pass
-        # print(i, end=" ")
+    print(permute(nums))
+    # for i in permute(nums):
+    #     print(i, end=" ")
     # print(iter(permute(nums)))
