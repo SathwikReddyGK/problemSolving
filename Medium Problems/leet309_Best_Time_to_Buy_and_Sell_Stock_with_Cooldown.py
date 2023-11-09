@@ -1,14 +1,21 @@
 def maxProfit(prices):
     # State Machine DP
-    buy = []
-    sell = []
+    bought = []
+    sold = []
     coolDown = []
 
-    buy.append(-prices[0])
-    sell.append(0)
+    bought.append(-prices[0])
+    sold.append(0)
     coolDown.append(0)
 
     for i in range(1,len(prices)):
+        bought.append(coolDown[i-1])
+        sold.append(max(bought[i-1],coolDown[i-1]))
+        coolDown.append(max(sold[i-1],coolDown[i-1],bought[i-1]))
+    
+    return max(bought[len(prices)-1],sold[len(prices)-1],coolDown[len(prices)-1])
+    
+
         
 
     # neetcode approach, implementing it
