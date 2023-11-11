@@ -2,7 +2,7 @@
 from collections import defaultdict
 
 def longestConsecutive(nums):
-    # User solution
+    # User solution, copied to test and see how it works
     mp=defaultdict(list)
     bl=defaultdict(bool)
     mx=0
