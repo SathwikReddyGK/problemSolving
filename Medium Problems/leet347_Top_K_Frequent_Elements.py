@@ -28,7 +28,7 @@ def topKFrequent(nums,k):
     # not implemented here due to lack of patience for now
 
     # Below is JAVA code of user converted to python by chatgpt, logic is same as before.
-    # This is little faster than what I wrote for same logic
+    # This is taking almost the same time as the code that I wrote when I converted the same JAVA code to Python below
         bucket = [None] * (len(nums) + 1)
         frequency_map = defaultdict(int)
 

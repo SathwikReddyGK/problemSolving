@@ -25,6 +25,12 @@ def longestConsecutive(nums):
         print("l: ",l)
     return mx
     # Neetcode logic
+    # Put values into set so that we are only running on unique elements of the set
+    # Then, since we need to find longest consequitive elements, there must be an element which doesn't
+    # have previous element[Eg: if there is [10,100,5,9,8,6,7]], in this sequence is 5,6,7,8,9,10. So
+    # we will have 5 as first element. So we find such element whose previous number is not in set. Then
+    # increment each time and check if next element exists. If exists then keep incrementing, get the highest lenght
+    # then check with next sequence and take the maximum length
     # length = 0
     # maxLength = 0
     # for num in nums:
