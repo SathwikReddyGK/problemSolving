@@ -32,6 +32,17 @@
 # -104 <= target <= 104
 
 # Solution
+
+# // Time Complexity : O(logn)
+# // Space Complexity : O(1)
+# // Did this code successfully run on Leetcode : Yes
+# // Any problem you faced while coding this : Need to make sure we use > or >= based on the test cases
+
+
+# // Your code here along with comments explaining your approach
+# Approach is to use Binary search to reduce search space. Using the value of nums[mid] to decide which part of the
+# array can be ignored to reduce the search space by half
+
 def search(nums,target):
     # Revisted on 12/21/2023
         low = 0
