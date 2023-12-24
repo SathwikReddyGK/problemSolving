@@ -38,7 +38,7 @@
 # // Your code here along with comments explaining your approach
 # Approach is to first find the target once in array, consider that as the point and recursively check if we can find target on
 # the left part of the array from where we previously found the target. This helps us find the start index. If we do the same
-# on the right part of the index from where we got the value initially, it gives us end position of the target repeat
+# on the right part of the index from where we got the value initially, it gives us end position of the target
 def searchRange(nums, target):
 
     def binarySearch(low,high,target,nums):
