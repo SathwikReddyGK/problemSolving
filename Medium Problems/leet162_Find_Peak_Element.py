@@ -36,7 +36,7 @@
 
 # // Your code here along with comments explaining your approach
 # Approach is to keep searching the higher number, used binary search to find mid, check if mid is greater than its neighbours
-# if not then move towards the neighbour who is greater than mid. Perform this recursively to find the solution
+# if not then move towards the neighbour who is greater than mid. Perform this recursively to find the solution     
 
 def findPeakElement(nums) -> int:
         low = 0
