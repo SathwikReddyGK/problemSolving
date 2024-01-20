@@ -28,14 +28,17 @@
 
 # Solution
 
-# // Time Complexity : 
-# // Space Complexity :
-# // Did this code successfully run on Leetcode :
-# // Any problem you faced while coding this : 
+# // Time Complexity : O(m*n) since we go through all the elements of matrix to find all zeros
+# // Space Complexity : O(m*n) in worst case all the elements can be zero in matrix
+# // Did this code successfully run on Leetcode : Yes
+# // Any problem you faced while coding this : No
 
 
 # // Your code here along with comments explaining your approach
-# Approach is 
+# Approach is to first find indices of all the 0's, mark anything with 1 to -1 and add them to queue. Then go through each index in queue and check if there
+# are any adjacent cells with -1 then change it to 1 and add indices of that queue. So, once all 0 indices are worked on we will
+# have indices of adjacent cells next to cells with 0's. We can call it level 1. We will continue to check if there are still cells
+# whose value is -1, if yes then make it 2 and continue
 
 from collections import deque
 
@@ -53,16 +56,16 @@ def updateMatrix(mat):
     while greedyQueue:
         rowCol = greedyQueue.popleft()
 
-        if rowCol[0] > 0 and ( mat[rowCol[0]-1][rowCol[1]] < 0): #or (mat[rowCol[0]-1][rowCol[1]] > 0 and mat[rowCol[0]-1][rowCol[1]] < mat[rowCol[0]][rowCol[1]] )):
+        if rowCol[0] > 0 and mat[rowCol[0]-1][rowCol[1]] < 0:
             mat[rowCol[0]-1][rowCol[1]] = mat[rowCol[0]][rowCol[1]] + 1
             greedyQueue.append((rowCol[0]-1,rowCol[1]))
-        elif rowCol[1] > 0 and ( mat[rowCol[0]][rowCol[1]-1] < 0): #or (mat[rowCol[0]][rowCol[1]-1] > 0 and mat[rowCol[0]][rowCol[1]-1] < mat[rowCol[0]][rowCol[1]] )):
+        if rowCol[1] > 0 and mat[rowCol[0]][rowCol[1]-1] < 0:
             mat[rowCol[0]][rowCol[1]-1] = mat[rowCol[0]][rowCol[1]] + 1
             greedyQueue.append((rowCol[0],rowCol[1]-1))
-        elif rowCol[0]+1 < rowNum and ( mat[rowCol[0]+1][rowCol[1]] < 0): #or (mat[rowCol[0]+1][rowCol[1]] > 0 and mat[rowCol[0]+1][rowCol[1]] < mat[rowCol[0]][rowCol[1]] )):
+        if rowCol[0]+1 < rowNum and mat[rowCol[0]+1][rowCol[1]] < 0:
              mat[rowCol[0]+1][rowCol[1]] = mat[rowCol[0]][rowCol[1]] + 1
              greedyQueue.append((rowCol[0]+1,rowCol[1]))
-        elif rowCol[1]+1 < colNum and ( mat[rowCol[0]][rowCol[1]+1] < 0): #or (mat[rowCol[0]][rowCol[1]+1] > 0 and mat[rowCol[0]][rowCol[1]+1] < mat[rowCol[0]][rowCol[1]] )):
+        if rowCol[1]+1 < colNum and mat[rowCol[0]][rowCol[1]+1] < 0:
             mat[rowCol[0]][rowCol[1]+1] = mat[rowCol[0]][rowCol[1]] + 1
             greedyQueue.append((rowCol[0],rowCol[1]+1))
 
@@ -70,5 +73,7 @@ def updateMatrix(mat):
 
 
 if __name__ == "__main__":
-    mat = [[0,0,0],[0,1,0],[1,1,1]]
+    mat = [[0,1,0,1,1],[1,1,0,0,1],[0,0,0,1,0],[1,0,1,1,1],[1,0,0,0,1]]
+    # expected
+    # [[0,1,0,1,2],[1,1,0,0,1],[0,0,0,1,0],[1,0,1,1,1],[1,0,0,0,1]]
     print(updateMatrix(mat))
