@@ -1,6 +1,52 @@
+# Description
+# Given an integer array nums of unique elements, return all possible 
+# subsets
+#  (the power set).
+
+# The solution set must not contain duplicate subsets. Return the solution in any order.
+
+ 
+
+# Example 1:
+
+# Input: nums = [1,2,3]
+# Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+# Example 2:
+
+# Input: nums = [0]
+# Output: [[],[0]]
+ 
+
+# Constraints:
+
+# 1 <= nums.length <= 10
+# -10 <= nums[i] <= 10
+# All the numbers of nums are unique.
+
+
+# Solution
+
+# // Time Complexity : O(2^n) since we will have choose no choose for each element, so if we build that tree there will be 2^n
+#                      iterations. Valid for recursion, for loop recursion and the two for loop approach
+#               
+# // Space Complexity : O(N) because of implicit stack of recursion, max recursion will be N
+#                       O(1) for the two for loop approach
+# 
+# // Did this code successfully run on Leetcode : Yes
+# // Any problem you faced while coding this : None
+
+
+# // Your code here along with comments explaining your approach
+# Approach is to use choose/no choose option for each element, if we draw the tree we can visualise. In each step if we choose
+# an element that gets added to the list, if we do not choose an element then existing list stays the same. So if we do not choose
+# any element, we get empty list. This approach exhaustively goes through all branches to create the power set
+# Approach2 is "For Loop Based Recursion", approach is almost same. Only thing is here we generally only take the choose scenario
+# and append the not choose before considering the choose scenario
+# Approach3 is to update empty list to result, then, for all the lists in result, copy the existing list and add each element one
+# by one to all the lists. Lists keep getting added and size of result keeps getting updated
 import datetime
 def subsets(nums):
-    # BFS, User logic, trying to implement it
+    # S30 and Leetcode User logic, trying to implement it,
     # As of now I think BFS takes 2^n
     res = []
 
@@ -11,6 +57,32 @@ def subsets(nums):
             res[-1].append(num)
     
     return res
+
+    # S30, for loop based recursion
+    # def helper(nums,pivot,path,result):
+    #     for i in range(pivot,len(nums)):
+    #         path.append(nums[i])
+    #         result.append(path.copy())
+    #         helper(nums,i+1,path,result)
+    #         path.pop()
+    # result = [[]]
+    # helper(nums,0,[],result)
+    # return result
+    # S30
+    # def helper(nums,idx,path,result):
+    #     if idx>=len(nums):
+    #         result.append(path.copy())
+    #         return
+        
+    #     path.append(nums[idx])
+    #     helper(nums,idx+1,path,result)
+    #     path.pop()
+    #     helper(nums,idx+1,path,result)
+        
+    # result = []
+    # helper(nums,0,[],result)
+    # return result
+
     # DFS, My solution completed with help of user solution
     # As of now I think DFS takes n!
     # res = []
