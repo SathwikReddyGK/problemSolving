@@ -1,9 +1,4 @@
-def helper(nums,pivot,path,result):
-        for i in range(pivot,len(nums)):
-            path.append(nums[i])
-            result.append(path.copy())
-            helper(nums,i+1,path,result)
-            path.pop()
-    result = [[]]
-    helper(nums,0,[],result)
-    return result
+if __name__ == "__main__":
+    a = -1
+    b = 2
+    print(a//b)
