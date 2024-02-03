@@ -38,14 +38,21 @@
 
 # Solution
 
-# // Time Complexity : 
-# // Space Complexity : 
+# // Time Complexity : follow - O(1)
+#                      postTweet - O(1)
+#                      getNewsFeed - O(n) it is actually O((n*10)log10), where n is number of users and we add 10 tweets for each
+#                      user to priority queue and each insert will be log10 since size of priority queue will be 10. Since 10 is
+#                      constant we can consider it O(n)
+# // Space Complexity : O(10)
 # // Did this code successfully run on Leetcode : 
 # // Any problem you faced while coding this : 
 
 
 # // Your code here along with comments explaining your approach
-# Approach is 
+# Approach is have a nexted dictionary to keep all the users a particular user is following. Have a list inside dictionary
+# to track the tweets posted by each user. For each tweet create and object with createdAt time to be stored. Now have a
+# prioirty queue of size 10 so that when we are trying to getnewsfeed, we will have the 10 recent in queue and rest will be
+# popped, so we can just pop those 10 into result.
 from queue import PriorityQueue
 class Twitter:
 
