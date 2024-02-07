@@ -21,8 +21,6 @@
 
 # Example 1:
 
-
-
 # Input: tree = [1,null,3,2,4,null,5,6]
 # Output: [1,null,3,2,4,null,5,6]
 # Explanation: The tree from the input data is shown above.

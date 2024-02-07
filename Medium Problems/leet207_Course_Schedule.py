@@ -39,6 +39,9 @@
 
 
 # // Your code here along with comments explaining your approach
+# Check Cycle Approach: We can keep array to make a note of visited nodes in each cycle and one array to keep overall if we have
+# reached node which does not have any other edge to be processed. Based on these two, we can decide if there is a cycle or not
+# by checking if any vertex already has marked "True" when we are going to that vertex as we are performing DFS
 # Approach is to come up with indegree for all the courses. If as we take courses, indegrees of all courses reduce to zero
 # that means we can take all courses. Create a list to hold indegree of each course. Create a adjacency list(using dictionary) for the map/graph which
 # keeps track of all the destinations node for each source node, with source node as key of dictonary
@@ -49,39 +52,71 @@
 
 from collections import deque
 def canFinish(numCourses, prerequisites):
-        map = {}
-        inDegree = [0 for _ in range(0,numCourses)]
-        verticesQueue = deque()
-        count = 0
-
-        if not prerequisites:
-            return True
-
-        for prerequisite in prerequisites:
-            out = prerequisite[1]
-            to = prerequisite[0]
-            if out not in map:
-                map[out] = []
-            map[out].append(to)
-            inDegree[to] += 1
-        
-        for i in range(0,numCourses):
-            if inDegree[i] == 0:
-                verticesQueue.append(i)
-        
-        while verticesQueue:
-            count += 1
-            vertex = verticesQueue.popleft()
-            if vertex in map:
-                for out in map[vertex]:
-                    inDegree[out] -= 1
-                    if inDegree[out] == 0:
-                        verticesQueue.append(out)
-                
-        if count == numCourses:
-            return True
+    map = {}
+    dp = [False for _ in range(numCourses)]
+    pathVisit = [False for _ in range(numCourses)]
+    for prerequisite in prerequisites:
+        if prerequisite[1] in map:
+            map[prerequisite[1]].append(prerequisite[0])
         else:
-            return False
+            map[prerequisite[1]] = [prerequisite[0]]
+    
+    for items in map.items():
+        if not dp[items[0]]:
+            if hasCycle(items[0],map,pathVisit,dp):
+                return False
+    return True
+
+def hasCycle(vertex,map,pathVisit,dp):
+    if dp[vertex] == True:
+        return False
+    
+    if pathVisit[vertex] == True:
+        return True
+    
+    pathVisit[vertex] = True
+
+    if vertex in map:
+        for vertices in map[vertex]:
+            if hasCycle(vertices,map,pathVisit,dp):
+                return True
+    
+    pathVisit[vertex] = False
+    dp[vertex] = True
+
+        # map = {}
+        # inDegree = [0 for _ in range(0,numCourses)]
+        # verticesQueue = deque()
+        # count = 0
+
+        # if not prerequisites:
+        #     return True
+
+        # for prerequisite in prerequisites:
+        #     out = prerequisite[1]
+        #     to = prerequisite[0]
+        #     if out not in map:
+        #         map[out] = []
+        #     map[out].append(to)
+        #     inDegree[to] += 1
+        
+        # for i in range(0,numCourses):
+        #     if inDegree[i] == 0:
+        #         verticesQueue.append(i)
+        
+        # while verticesQueue:
+        #     count += 1
+        #     vertex = verticesQueue.popleft()
+        #     if vertex in map:
+        #         for out in map[vertex]:
+        #             inDegree[out] -= 1
+        #             if inDegree[out] == 0:
+        #                 verticesQueue.append(out)
+                
+        # if count == numCourses:
+        #     return True
+        # else:
+        #     return False
 
 if __name__ == "__main__":
     # numCourses = 2
