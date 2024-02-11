@@ -30,9 +30,12 @@
 
 # Solution
 
-# // Time Complexity : O(V+E) since we will be removing all the edges one by one to see if all the edges can be removed and
+# // Time Complexity : O(V+E) even in check cycle approach, since we do not process the same vertex again once it is marked in DP
+#                      Incase DP is not maintained, then it will be V^V
+#                      O(V+E) since we will be removing all the edges one by one to see if all the edges can be removed and
 #                      since we do it by going for each vertex once, so we need to include vertex count as well.
-# // Space Complexity : O(2V+2E), since dictionary will have all the edges and vertices, indegree will have size equal to number
+# // Space Complexity : O(V) since we keep an array for all the vertices to mark in path and an array for all vertices for DP
+#                       O(2V+2E), since dictionary will have all the edges and vertices, indegree will have size equal to number
 #                       of vertices and queue size can go upto numbmer of edges in worst case scenario
 # // Did this code successfully run on Leetcode : Yes
 # // Any problem you faced while coding this : None
