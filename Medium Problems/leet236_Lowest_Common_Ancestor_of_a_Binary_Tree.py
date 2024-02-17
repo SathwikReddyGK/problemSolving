@@ -33,8 +33,10 @@
 
 # Solution
 
-# // Time Complexity : O(n) we might end up looking at all the nodes
-# // Space Complexity : O(n) since we will be using list to save paths 
+# // Time Complexity : Second Approach O(n)  we might end up looking at all the nodes
+#                       First Approach O(n) we might end up looking at all the nodes
+# // Space Complexity : Second Approach O(1) we are not 
+#                       First Approach O(n) since we will be using list to save paths 
 # // Did this code successfully run on Leetcode : Yes
 # // Any problem you faced while coding this : None
 
