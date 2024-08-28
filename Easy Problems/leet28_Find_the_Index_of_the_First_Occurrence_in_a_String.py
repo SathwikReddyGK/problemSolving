@@ -1,35 +1,16 @@
-# Description
-# Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-
- 
-
-# Example 1:
-
-# Input: haystack = "sadbutsad", needle = "sad"
-# Output: 0
-# Explanation: "sad" occurs at index 0 and 6.
-# The first occurrence is at index 0, so we return 0.
-# Example 2:
-
-# Input: haystack = "leetcode", needle = "leeto"
-# Output: -1
-# Explanation: "leeto" did not occur in "leetcode", so we return -1.
- 
-
-# Constraints:
-
-# 1 <= haystack.length, needle.length <= 104
-# haystack and needle consist of only lowercase English characters.
-
 # Solution
 
-# // Time Complexity : Hashing Approach: O(m) where m is the lenght of haystack
-# // Space Complexity : O(1) not using any extra space
+# // Time Complexity :  KMP Algorithm O(m+n)
+#                       Hashing Approach: O(m) where m is the lenght of haystack
+# // Space Complexity : KMP Algorithm O(m) - for LPS Array
+#                       Hashing Approach: O(1) not using any extra space
 # // Did this code successfully run on Leetcode : Yes
 # // Any problem you faced while coding this : None
 
 
 # // Your code here along with comments explaining your approach
+# KPM Algorithm Approach: Need to implement KMP Algorithm to find LPS(Largest prefix suffix)
+
 # Hashing Approach: Since data will have smaller case letters, we can assign one value for each character from 1 to 26. Then 
 # just like decimal system, we should convert the needle string characters into decimal 26 so that we get a hash value.
 # example: abc will be ((26^2)*1) + ((26^1)*2) + ((26^0)*3) if we assign a=1,b=2 and c=3.
@@ -37,48 +18,93 @@
 # as we keep incrementing low and high pointers of haystack and calculating hash value of each substring. The moment a substring's
 # hash value matches with needle hash value we can return the low giving the start index of the substring as result.
 
+
+# new implementation of KMP Algorithm
+def getLps(needle,lps,n):
+    lps[0] = 0
+
+    i = 1
+    j = 0
+    while i<n:
+        if needle[j] == needle[i]:
+            j += 1
+            lps[i] = j
+            i += 1
+        elif j > 0:
+            j = lps[j-1]
+        elif j == 0:
+            lps[i] = j
+            i += 1
+
 def strStr(haystack, needle):
-    #S30
+    # KMP Algorithm
     m = len(haystack)
     n = len(needle)
+    lps = [0]*n
 
-    if m<n:
+    getLps(needle,lps,n)
+
+    i = 0
+    j = 0
+
+    while i<m and j<n:
+        if needle[j] == haystack[i]:
+            j += 1
+            i += 1
+        elif j>0:
+            j = lps[j-1]
+        elif j == 0:
+            i += 1
+    
+    if j == n:
+        return i-n
+    else:
         return -1
 
-    hash = 0
-    idx = n-1
 
-    for c in needle:
-        hash = (26*hash) + (ord(c)-ord("a")+1)
-        idx -= 1
-    
-    low = 0
-    high = 0
-    idx = n-1
+    #S30
+# def strStr(haystack, needle):
+    # m = len(haystack)
+    # n = len(needle)
 
-    newHash = 0
-    while high<n:
-        newHash = (26*newHash) + (ord(haystack[high])-ord("a")+1)
-        idx -= 1
-        high += 1
-    
-    if newHash == hash:
-        return low
-    
-    low += 1
-    idx = n-1
+    # if m<n:
+    #     return -1
 
-    while low<m and high<m:
-        newHash -= (26**idx)*(ord(haystack[low-1])-ord("a")+1)
-        newHash = 26*newHash + (ord(haystack[high])-ord("a")+1)
-        if newHash == hash:
-            return low
+    # hash = 0
+    # idx = n-1
+
+    # for c in needle:
+    #     hash = (26*hash) + (ord(c)-ord("a")+1)
+    #     idx -= 1
+    
+    # low = 0
+    # high = 0
+    # idx = n-1
+
+    # newHash = 0
+    # while high<n:
+    #     newHash = (26*newHash) + (ord(haystack[high])-ord("a")+1)
+    #     idx -= 1
+    #     high += 1
+    
+    # if newHash == hash:
+    #     return low
+    
+    # low += 1
+    # idx = n-1
+
+    # while low<m and high<m:
+    #     newHash -= (26**idx)*(ord(haystack[low-1])-ord("a")+1)
+    #     newHash = 26*newHash + (ord(haystack[high])-ord("a")+1)
+    #     if newHash == hash:
+    #         return low
         
-        low += 1
-        high += 1
+    #     low += 1
+    #     high += 1
     
-    return -1
+    # return -1
 
+    # Old implementation of KMP Algorithm
     # psl = [0] * len(needle)
 
     # psl[0] = 0
@@ -131,6 +157,6 @@ def strStr(haystack, needle):
     # return -1
 
 if __name__ == "__main__":
-    haystack = "hello"
-    needle = "ll"
+    haystack = "sadbutsad"
+    needle = "sad"
     print(strStr(haystack, needle))
