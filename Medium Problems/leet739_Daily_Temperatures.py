@@ -30,7 +30,7 @@
 
 # Solution
 
-# // Time Complexity :  O(N)
+# // Time Complexity :  O(2N)
 # // Space Complexity : O(N)
 # // Did this code successfully run on Leetcode : Yes
 # // Any problem you faced while coding this : No
